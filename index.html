@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <link href="//cdn-na.infragistics.com/jquery/20132/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+        <link href="//cdn-na.infragistics.com/jquery/20132/latest/css/structure/infragistics.css" rel="stylesheet" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            body {
+                padding-top: 1.5em;
+            }
+
+            h1 {
+                font-size: 4vw;
+            }
+        </style>
+    </head>
+    <body class="container">
+        <a href="http://igniteui.com" target="_blank"><img src="http://infragistics-blogs.github.io/github-assets/logos/igniteui.png" alt="Ignite UI" title="Ignite UI" class="img-responsive" /></a>
+        <h1>igGrid Responsive &amp; Touch Features</h1>
+
+        <table id="grid"></table>
+
+        <script src="//modernizr.com/downloads/modernizr-latest.js"></script>
+        <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+        <script src="//cdn-na.infragistics.com/jquery/20132/latest/js/infragistics.core.js"></script>
+        <script src="//cdn-na.infragistics.com/jquery/20132/latest/js/infragistics.lob.js"></script>
+        <script src="//igniteui.com/data-files/northwind.js"></script>
+        <script>
+            $(function () {
+                $('#grid').igGrid({
+                    primaryKey: 'EmployeeID',
+                    width: '100%',
+                    autoGenerateColumns: false,
+                    columns: [
+                        { headerText: 'Employee ID', key: 'EmployeeID', dataType: 'number' },
+                        { headerText: 'First Name', key: 'FirstName', dataType: 'string' },
+                        { headerText: 'Last Name', key: 'LastName', dataType: 'string' },
+                        { headerText: 'Title', key: 'Title', dataType: 'string' }
+                    ],
+                    dataSource: northwind,
+                    responseDataKey: 'results',
+                    features: [
+                        {
+                            name: 'Responsive',
+                            columnSettings: [
+                                {
+                                    columnKey: 'EmployeeID',
+                                    classes: 'hidden-sm hidden-xs'
+                                },
+                                {
+                                    columnKey: 'Title',
+                                    classes: 'hidden-xs'
+                                }
+                            ]
+                        }, // responsive
+                        {
+                            name: 'Sorting',
+                            type: 'local',
+                            mode: 'multi'
+                        }, // sorting
+                        {
+                            name: 'Filtering',
+                            type: 'local',
+                            mode: 'advanced'
+                        }, // filtering
+                        {
+                            name: 'Hiding'
+                        }, // hiding
+                        {
+                            name: 'ColumnMoving'
+                        }, // column moving
+                        {
+							name: 'Selection',
+							multipleSelection: true,
+							mode: 'cell',
+							touchDragSelect: true
+						}, // selection
+                        {
+                            name: 'Updating',
+                            enableAddRow: true,
+                            enableDeleteRow: true,
+                            editMode: 'cell',
+                            columnSettings: [
+                                {
+                                    columnKey: 'EmployeeID',
+                                    editorOptions: { type: 'numeric', disabled: true}
+                                },
+                            ]
+                        }  // updating
+                    ]
+                });
+            });
+        </script>
+    </body>
+</html>
